@@ -1,0 +1,31 @@
+#include<iostream>
+#include<stdio.h>
+#include<unistd.h>
+#include<stdlib.h>
+void main(){
+   int filedp[2];
+   int recv[32];
+   pid_t pid;
+   pipe(filedp);
+  pid=fork();
+  if(pid<0){
+     printf("Fork failed");
+
+   }
+  else if(pid==0){
+     close(filedp[0]);
+     FILE *out=fdopen(filedp[1],"w");
+     fprintf(out,"Hello world");
+     
+  }
+  else{
+     close(filedp[1]);
+     FILE *in=fdopen(filedp[0],"r");
+     fscanf(in,"%s", recv);
+     printf("%s",recv);
+
+   }
+
+
+
+}
