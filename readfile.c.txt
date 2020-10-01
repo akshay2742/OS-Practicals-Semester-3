@@ -51,3 +51,43 @@ int main()
    fclose(fptr);
    return 0;
 }
+
+//cpp
+#include<iostream>
+#include<fstream>
+#include<string>
+using namespace std;
+
+void my_read(char delim)
+{
+  fstream file;
+  string filename;
+  char ch;
+  cout<<"Enter the file name: ";
+  cin>>filename;
+  file.open(filename);
+
+  if(!file)
+  {
+    cout<<"File not found!!"<<endl;
+    exit(1);
+  }
+  else
+  {
+    while(ch != delim)
+    {
+      file.get(ch);
+      if(ch == '$')
+        break;
+      cout<<ch;
+    }
+  }
+  file.close();
+}
+
+int main()
+{
+  cout<<"Program to read a file"<<endl;
+  my_read('$');
+  return 0;
+}
