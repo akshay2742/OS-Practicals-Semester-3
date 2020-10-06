@@ -77,6 +77,7 @@ ______________________________________
 #include <sys/types.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <wait.h>
 int main()
 {
     pid_t pid;
@@ -91,12 +92,15 @@ int main()
     else if (pid == 0)
     {
 		/* child process */
+	        printf("Child is going to sleep for 5 seconds");
+	        sleep(5);
 		execlp("/bin/ls","ls",NULL);
     }
     else
     {
 		/* parent process */
 		/* parent will wait for the child to complete */
+	        printf("Parent will wait for the child process as it sleeps for 5 seconds");
 		wait(NULL);
         printf("Child Complete");
     }
