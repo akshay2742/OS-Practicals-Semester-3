@@ -39,3 +39,62 @@ int main()
  
    return 0;
 }
+
+//cpp
+//Program to copy contents of a file to another
+#include<iostream>
+#include<fstream>
+#include<string>
+using namespace std;
+
+void my_copy()
+{
+  fstream file_r, file_w;
+  char fname_r[15], fname_w[15];
+  char ch, delim = '$';
+
+  cout<<"Enter the file name to read the content: ";
+  cin>>fname_r;
+  file_r.open(fname_r);
+  if(!file_r)
+  {
+    cout<<"File not found!!"<<endl;
+    exit(1);
+  }
+
+  cout<<"Enter the file name to write the content: ";
+  cin>>fname_w;
+  file_w.open(fname_w);
+  if(!file_w)
+  {
+    cout<<"File not found!!"<<endl;
+    exit(1);
+  }
+
+  if(file_r && file_w)
+  {
+    while(ch != delim)
+    {
+      file_r.get(ch);
+      if(ch == '$')
+        break;
+      file_w<<ch;
+    }
+    cout<<"\nContent successfully copied!!"<<endl;
+  }
+  else
+    cout<<"Content not copied!!"<<endl;
+
+  file_r.close();
+  file_w.close();
+}
+
+int main()
+{
+  cout<<"Program to copy contents of a file to another"<<endl;
+  my_copy();
+  return 0;
+}
+
+
+
